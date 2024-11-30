@@ -1,4 +1,4 @@
-# GuruKilli
+<div><h1> <b>GuruKilli</b> : A key to Success</h1></div>
 
 ## Interactive Curriculum Learning App for Std X Students
 
