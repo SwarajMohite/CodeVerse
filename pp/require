@@ -1,0 +1,108 @@
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+const SUPABASE_URL = "https://ubhpjkmzxjvwcgkbgkdq.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InViaHBqa216eGp2d2Nna2Jna2RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAxMjk5NTcsImV4cCI6MjA1NTcwNTk1N30.L4XXMnGK2Nu2Ewfzm0U9nZb0FtYmoiFrDnByvMwrLl0";
+
+
+
+
+async function uploadFile() {
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please select a file!");
+        return;
+    }
+
+    const filePath = `uploads/${Date.now()}_${file.name}`;
+    console.log("Uploading file:", filePath);
+
+    // Upload to Supabase Storage
+    const { error } = await supabase.storage.from("notes-uploads").upload(filePath, file);
+
+    if (error) {
+        alert("Upload failed!");
+        console.error("Storage Upload Error:", error);
+        return;
+    }
+
+    // ✅ Get Public URL
+    const fileUrl = `https://bbhazmaaizxsxdqhfwbv.supabase.co/storage/v1/object/public/notes-uploads/${filePath}`;
+    console.log("Public URL:", fileUrl);
+
+    // ✅ Insert into Database
+    const { error: insertError } = await supabase.from("notes").insert([
+        { file_name: file.name, file_url: fileUrl, approved: false }
+    ]);
+
+    if (insertError) {
+        alert("Database entry failed!");
+        console.error("Database Insert Error:", insertError);
+        return;
+    }
+
+    alert("Upload successful! Waiting for admin approval.");
+}
+
+
+
+
+
+
+
+
+
+
+async function loadPendingFiles() {
+    console.log("🟡 Fetching pending files...");
+
+    const { data, error } = await supabase.from("notes").select("*").eq("approved", false);
+
+    if (error) {
+        console.error("Error fetching pending files:", error);
+        return;
+    }
+
+    console.log("✅ Fetched Pending Files:", data);
+
+    const pendingFilesDiv = document.getElementById("pendingFiles");
+    if (!pendingFilesDiv) {
+        console.error("❌ Element #pendingFiles not found in DOM.");
+        return;
+    }
+
+    pendingFilesDiv.innerHTML = "";
+
+    if (data.length === 0) {
+        pendingFilesDiv.innerHTML = "<p>No pending files.</p>";
+        return;
+    }
+
+    data.forEach(file => {
+        const fileElement = document.createElement("div");
+        fileElement.innerHTML = `
+            <p>${file.file_name}</p>
+            <a href="${file.file_url}" target="_blank">View File</a>
+            <button onclick="approveFile('${file.id}')">Approve</button>
+            <button onclick="rejectFile('${file.id}')">Reject</button>
+        `;
+        pendingFilesDiv.appendChild(fileElement);
+    });
+}
+
+
+
+
+async function approveFile(fileId) {
+    const { error } = await supabase.from("notes").update({ approved: true }).eq("id", fileId);
+
+    if (error) {
+        alert("Approval failed!");
+        console.error("Approval Error:", error);
+        return;
+    }
+
+    alert("File approved!");
+    loadPendingFiles();
+}
