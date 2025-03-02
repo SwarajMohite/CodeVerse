@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #F2E8C6; /* Light cream background */
+}
+
+#game-container {
+  position: relative;
+  width: 400px;
+  height: 600px;
+  background-color: #DAD4B5; /* Light beige */
+  border: 2px solid #800000;
+  overflow: hidden;
+}
+
+#player {
+  position: absolute;
+  bottom: 20px;
+  left: 180px;
+  width: 40px;
+  height: 40px;
+  background-color: #E0A75E; /* Golden yellow */
+  border-radius: 5px;
+}
+
+.falling-object {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #973131; /* Muted red */
+  top: 0;
+  border-radius: 5px;
+}
+
+#scoreboard {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 18px;
+  color: #800000;
+  font-weight: bold;
+}

@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: #f5f7fb;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-container {
+    width: 100%;
+    height: calc(100vh - 100px); /* Adjust for prompt area */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 16px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.user-chat-box {
+    width: 100%;
+    max-width: 680px;
+    margin-left: auto;
+    padding-right: 64px;
+    position: relative;
+}
+
+.ai-chat-box {
+    width: 100%;
+    max-width: 680px;
+    padding-left: 64px;
+    position: relative;
+}
+
+.user-chat-area {
+    width: 100%;
+    padding: 16px 20px;
+    background-color: #031946;
+    color: white;
+    border-radius: 16px 16px 0 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    line-height: 1.5;
+}
+
+.ai-chat-area {
+    width: 100%;
+    padding: 16px 20px;
+    background-color: white;
+    color: #1e293b;
+    border-radius: 16px 16px 16px 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    line-height: 1.5;
+}
+
+.chooseimg {
+    width: 200px;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+#userImage {
+    position: absolute;
+    right: 16px;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#aiImage {
+    position: absolute;
+    left: 16px;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.prompt-area {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    border-top: 1px solid #e2e8f0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.prompt-area input {
+    width: 100%;
+    max-width: 800px;
+    height: 56px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 28px;
+    padding: 0 24px;
+    color: #1e293b;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.prompt-area input:focus {
+    outline: none;
+    border-color: #031946;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.prompt-area input::placeholder {
+    color: #94a3b8;
+}
+
+.prompt-area button {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    background-color: #031946;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.prompt-area button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.prompt-area button img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #94a3b8;
+    border-radius: 50%;
+    animation: dotAnimation 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(1) { animation-delay: 0s; }
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotAnimation {
+    0%, 100% {
+        transform: scale(0.7);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.load {
+    width: 24px;
+    height: 24px;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Add these new styles to your existing CSS */
+.file-upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.preview-container {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: white;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#preview-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+#remove-image {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ef4444;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid white;
+    padding: 0;
+}
+
+.user-chat-area img, .ai-chat-area img {
+    max-width: 200px;
+    border-radius: 8px;
+    margin-top: 12px;
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-container {
+        padding: 16px;
+    }
+    
+    .user-chat-box {
+        padding-right: 48px;
+    }
+    
+    .ai-chat-box {
+        padding-left: 48px;
+    }
+    
+    .prompt-area {
+        padding: 16px;
+    }
+    
+    .prompt-area input {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-chat-box {
+        padding-right: 40px;
+    }
+    
+    .ai-chat-box {
+        padding-left: 40px;
+    }
+    
+    .user-chat-area,
+    .ai-chat-area {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+    
+    #userImage,
+    #aiImage {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .prompt-area button {
+        width: 44px;
+        height: 44px;
+    }
+}
