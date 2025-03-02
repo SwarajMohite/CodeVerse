@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India's Location Quest 🎯</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        h1 {
+            background: linear-gradient(90deg, #ff512f, #dd2476);
+            padding: 20px;
+            margin: 0;
+            font-size: 24px;
+            border-bottom: 3px solid white;
+        }
+
+        /* Game Container */
+        .game-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Question Box */
+        #question-box {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .option, #restart-btn {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .option:hover, #restart-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .correct {
+            background: #28a745;
+            color: white;
+        }
+
+        .wrong {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Timer */
+        #timer {
+            font-size: 22px;
+            margin-top: 10px;
+            color: yellow;
+            font-weight: bold;
+        }
+
+        /* Score */
+        #score-container {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Restart Button */
+        #restart-btn {
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+            color: black;
+            display: none;
+        }
+        /* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #E3F2FD;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header styles */
+.banner {
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sticky Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 50px;
+    background: #1944ba;
+    transition: all 0.3s ease;
+}
+
+.navbar.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 25px;
+    position: relative;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.navbar ul li::after {
+    content: '';
+    height: 2.5px;
+    width: 0;
+    background: #8ca7f0;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar sticky">
+        <div class="logo-container">
+            <img src="gurukilli.jpg" alt="Gurukilli Logo" class="logo">
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="authentication/frontend/register.html">Subjects</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="authentication/frontend/register.html">Login</a></li>
+        </ul>
+    </nav>
+
+
+    <h1>📍 India's Location Quest 🎯</h1>
+    
+    <div class="game-container">
+        <h2 id="question-box">Get ready! The game is starting... 🕹️</h2>
+
+        <button class="option" onclick="checkAnswer(0)"></button>
+        <button class="option" onclick="checkAnswer(1)"></button>
+        <button class="option" onclick="checkAnswer(2)"></button>
+        <button class="option" onclick="checkAnswer(3)"></button>
+
+        <div id="timer">⏳ Time: <span id="time">10</span> sec</div>
+        <div id="score-container">⭐ Score: <span id="score">0</span></div>
+
+        <button id="restart-btn" onclick="restartGame()">🔄 Restart Game</button>
+    </div>
+
+    <script>
+        let questions = [
+            { 
+                question: "📍 What is India's **northernmost latitude**?", 
+                options: ["37°6'N", "28°4'N", "8°4'N", "35°8'N"], 
+                answer: 0 
+            },
+            { 
+                question: "📍 The **Tropic of Cancer** passes through __ states of India.", 
+                options: ["5", "6", "7", "8"], 
+                answer: 3 
+            },
+            { 
+                question: "📍 Which longitude is used for **IST (Indian Standard Time)**?", 
+                options: ["75.5°E", "80.0°E", "82.5°E", "85.5°E"], 
+                answer: 2 
+            },
+            { 
+                question: "📍 Which country is **NOT a neighbor of India**?", 
+                options: ["Nepal", "Myanmar", "Thailand", "Bhutan"], 
+                answer: 2 
+            },
+            { 
+                question: "📍 What is India's **southernmost latitude**?", 
+                options: ["6°4'N", "8°4'N", "10°2'N", "9°6'N"], 
+                answer: 1 
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 10;
+        let timer;
+
+        function loadQuestion() {
+            clearInterval(timer);
+            timeLeft = 10;
+            document.getElementById("time").textContent = timeLeft;
+            document.getElementById("restart-btn").style.display = "none";
+
+            let q = questions[currentQuestion];
+            document.getElementById("question-box").textContent = q.question;
+
+            let options = document.querySelectorAll(".option");
+            for (let i = 0; i < options.length; i++) {
+                options[i].textContent = q.options[i];
+                options[i].classList.remove("correct", "wrong");
+                options[i].style.display = "block"; 
+            }
+
+            timer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    document.getElementById("time").textContent = timeLeft;
+                } else {
+                    clearInterval(timer);
+                    nextQuestion(false);
+                }
+            }, 1000);
+        }
+
+        function checkAnswer(selected) {
+            let options = document.querySelectorAll(".option");
+            let correctIndex = questions[currentQuestion].answer;
+
+            if (selected === correctIndex) {
+                options[selected].classList.add("correct");
+                score += 10;
+                document.getElementById("score").textContent = score;
+            } else {
+                options[selected].classList.add("wrong");
+                options[correctIndex].classList.add("correct");
+            }
+
+            clearInterval(timer);
+            setTimeout(() => nextQuestion(true), 1000);
+        }
+
+        function nextQuestion(isAnswered) {
+            if (!isAnswered) {
+                document.getElementById("question-box").textContent = "⏳ Time's up! Next question...";
+            }
+
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                setTimeout(loadQuestion, 1500);
+            } else {
+                document.getElementById("question-box").textContent = "🎉 Game Over! Your Final Score: " + score;
+                document.getElementById("restart-btn").style.display = "block";
+                
+                // Hide options after game ends
+                let options = document.querySelectorAll(".option");
+                options.forEach(button => button.style.display = "none");
+            }
+        }
+
+        function restartGame() {
+            score = 0;
+            currentQuestion = 0;
+            document.getElementById("score").textContent = score;
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+
+</body>
+</html>

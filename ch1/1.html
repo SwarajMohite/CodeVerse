@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 Field Trip Adventure</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #2E3192, #1BFFFF);
+            color: white;
+        }
+
+        h1 {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            padding: 20px;
+            margin: 0;
+            font-size: 24px;
+            border-bottom: 3px solid white;
+        }
+
+        /* Game Container */
+        .game-container {
+            width: 80%;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Location Buttons */
+        .location {
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 10px auto;
+            padding: 15px;
+            background: linear-gradient(90deg, #FF512F, #DD2476);
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .location:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, #DD2476, #FF512F);
+        }
+
+        /* Info Box */
+        #info-box {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Progress Bar */
+        #progress-container {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #progress {
+            font-size: 18px;
+            font-weight: bold;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌍 Field Trip Adventure - Explore India's Geography</h1>
+    
+    <div class="game-container">
+        <h2>Select a Location to Explore:</h2>
+        
+        <button class="location" data-name="Himalayas" data-info="🏔️ The Himalayas are the world's tallest mountain range, stretching across northern India. They influence monsoon patterns and are home to Mount Everest.">🏔️ Himalayas</button>
+        <button class="location" data-name="Thar Desert" data-info="🏜️ The Thar Desert is India's largest desert, covering Rajasthan and Gujarat. It has extreme temperatures and unique desert wildlife.">🏜️ Thar Desert</button>
+        <button class="location" data-name="Western Ghats" data-info="🌿 The Western Ghats are a UNESCO World Heritage site known for their biodiversity. They are home to many endemic species and play a vital role in monsoon rainfall.">🌿 Western Ghats</button>
+        <button class="location" data-name="Sundarbans" data-info="🐯 The Sundarbans in West Bengal are home to the famous Bengal tiger and the world's largest mangrove forest, which protects coastal regions from cyclones.">🐯 Sundarbans</button>
+        <button class="location" data-name="Andaman Islands" data-info="🏝️ The Andaman and Nicobar Islands are famous for their beautiful beaches, coral reefs, and diverse marine life.">🏝️ Andaman Islands</button>
+        <button class="location" data-name="Ganges River" data-info="🌊 The Ganges is India's most sacred river, flowing from the Himalayas to the Bay of Bengal. It supports millions of people and is vital for agriculture.">🌊 Ganges River</button>
+        <button class="location" data-name="Rann of Kutch" data-info="🦩 The Rann of Kutch in Gujarat is a vast salt marsh that turns into a white desert during winter. It hosts the famous Rann Utsav festival.">🦩 Rann of Kutch</button>
+        <button class="location" data-name="Ladakh" data-info="❄️ Ladakh is known for its cold desert climate, high-altitude lakes, and Tibetan Buddhist culture. Pangong Lake is a major attraction here.">❄️ Ladakh</button>
+        <button class="location" data-name="Deccan Plateau" data-info="⛰️ The Deccan Plateau covers most of central and southern India, rich in black soil, making it suitable for agriculture.">⛰️ Deccan Plateau</button>
+        <button class="location" data-name="Chilika Lake" data-info="🦢 Chilika Lake in Odisha is Asia’s largest coastal lagoon, home to thousands of migratory birds and dolphins.">🦢 Chilika Lake</button>
+
+        <div id="info-box"></div>
+
+        <div id="progress-container">
+            <p>🌟 Locations Explored: <span id="explored-count">0</span> / 10</p>
+        </div>
+    </div>
+
+    <script>
+        let exploredCount = 0;
+        let exploredLocations = {};
+
+        document.querySelectorAll('.location').forEach(location => {
+            location.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const info = this.getAttribute('data-info');
+
+                document.getElementById('info-box').innerHTML = `<h3>${name}</h3><p>${info}</p>`;
+                document.getElementById('info-box').style.display = 'block';
+
+                if (!exploredLocations[name]) {
+                    exploredLocations[name] = true;
+                    exploredCount++;
+                    document.getElementById('explored-count').innerText = exploredCount;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

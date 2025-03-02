@@ -1,0 +1,210 @@
+<!-- Chapter 2: Location & Extent - Find the Coordinates Game -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography Games - Get the Coordinates</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto 0 auto;
+            /* Added margin-top: 100px; */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .container {
+    max-width: 600px;
+    margin: 150px auto 0 auto; /* Increase margin-top for more spacing */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+        .button {
+            display: block;
+            margin: 10px auto;
+            padding: 12px;
+            width: 80%;
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff9966, #ff5e62);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #ff5e62, #ff9966);
+        }
+
+        .question-box {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #E3F2FD;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        .banner {
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Sticky Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px 50px;
+            background: #1944ba;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            list-style: none;
+            display: inline-block;
+            margin: 0 25px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .navbar ul li::after {
+            content: '';
+            height: 2.5px;
+            width: 0;
+            background: #8ca7f0;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            transition: 0.5s;
+        }
+
+        .navbar ul li:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar sticky">
+        <div class="logo-container">
+            <img src="gurukilli.jpg" alt="Gurukilli Logo" class="logo">
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="authentication/frontend/register.html">Subjects</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="authentication/frontend/register.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>🌍 Get the Coordinates 🧭</h2>
+        <p>Places with their correct coordinates!</p>
+        <div id="question" class="question-box">Click below to start!</div>
+        <button class="button" onclick="generateQuestion()">📍 Get a Location</button>
+        <h3 id="answer-result" class="result-box"></h3>
+    </div>
+    <script>
+        const locations = [
+            { place: "New Delhi", coordinates: "28.61°N, 77.23°E", fact: "New Delhi is the capital of India and a major political hub." },
+            { place: "Mumbai", coordinates: "19.07°N, 72.87°E", fact: "Mumbai is India's financial capital and home to Bollywood." },
+            { place: "Chennai", coordinates: "13.08°N, 80.27°E", fact: "Chennai is known for its historic temples and vibrant culture." },
+            { place: "Kolkata", coordinates: "22.57°N, 88.36°E", fact: "Kolkata is famous for its colonial architecture and cultural festivals." },
+            { place: "Jaipur", coordinates: "26.92°N, 75.82°E", fact: "Jaipur, the Pink City, is known for its royal palaces and heritage sites." },
+            { place: "Hyderabad", coordinates: "17.38°N, 78.48°E", fact: "Hyderabad is known for its IT industry and the historic Charminar." },
+            { place: "Bangalore", coordinates: "12.97°N, 77.59°E", fact: "Bangalore is India's Silicon Valley and a major tech hub." }
+        ];
+
+        function generateQuestion() {
+            const result = document.getElementById("answer-result");
+            const questionBox = document.getElementById("question");
+            questionBox.style.opacity = 0;
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * locations.length);
+                const location = locations[randomIndex];
+                questionBox.textContent = `Where is ${location.place} located?`;
+                questionBox.style.opacity = 1;
+                setTimeout(() => {
+                    result.textContent = `📌 Coordinates: ${location.coordinates} - ${location.fact}`;
+                }, 1500);
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

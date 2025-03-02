@@ -1,0 +1,90 @@
+<!-- Chapter 1: Field Visit - Exploration Adventure Game -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography Games - Exploration Adventure</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+            color: white;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .button {
+            display: block;
+            margin: 10px auto;
+            padding: 12px;
+            width: 80%;
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff9966, #ff5e62);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #ff5e62, #ff9966);
+        }
+        .scenario-box {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .result-box {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🚶 Exploration Adventure 🌍</h2>
+        <p>Navigate through different terrains and collect field data!</p>
+        <div id="scenario" class="scenario-box">Click to start your adventure!</div>
+        <button class="button" onclick="generateScenario()">🎒 Start Exploration</button>
+        <h3 id="exploration-result" class="result-box"></h3>
+    </div>
+    <script>
+        const explorationScenarios = [
+            { scenario: "You're in a dense forest. What will you document?", correct: "Wildlife and Vegetation", explanation: "Recording flora and fauna is key in a forest field visit." },
+            { scenario: "You've reached a coastal region. What's important here?", correct: "Tides and Marine Life", explanation: "Observing tides, marine species, and coastal erosion is crucial." },
+            { scenario: "You're in a desert. What should you record?", correct: "Sand Dunes and Climate", explanation: "Deserts have unique landforms and extreme climate variations." },
+            { scenario: "You're near a river basin. What’s your focus?", correct: "Water Flow and Sediments", explanation: "Studying water flow patterns and sediment deposition is essential." },
+            { scenario: "You've reached a hilly region. What will you examine?", correct: "Slope and Soil Erosion", explanation: "Understanding topography and soil conservation measures is key." }
+        ];
+        
+        function generateScenario() {
+            const result = document.getElementById("exploration-result");
+            const scenarioBox = document.getElementById("scenario");
+            scenarioBox.style.opacity = 0;
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * explorationScenarios.length);
+                const scenario = explorationScenarios[randomIndex];
+                scenarioBox.textContent = scenario.scenario;
+                scenarioBox.style.opacity = 1;
+                setTimeout(() => {
+                    result.textContent = `✅ Correct Focus: ${scenario.correct} - ${scenario.explanation}`;
+                }, 1500);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
