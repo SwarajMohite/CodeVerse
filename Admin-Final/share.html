@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Notes</title>
+
+    <!-- ✅ Load Supabase First -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- ✅ Load script.js After -->
+    <script defer src="share.js"></script>
+</head>
+<body>
+    <h1>Upload Your Files (Recorded Video, Image, PDF, PPT, Word Documents) for Students</h1>
+    
+    <!-- Input field allowing multiple types of files -->
+    <input type="file" id="fileInput" accept="video/*,image/*,.pdf,.ppt,.pptx,.doc,.docx" multiple>
+
+    <input type="text" id="uploaderName" placeholder="Enter your name" required>
+    <button id="uploadBtn">Upload</button>
+
+    <p id="status"></p>
+</body>
+</html>

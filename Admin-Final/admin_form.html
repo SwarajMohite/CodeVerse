@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Admin Login</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+   * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #2c2c54, #713ABE, #2c2c54);
+  color: #fff;
+  margin: 0;
+
+  
+}
+
+.navbar {
+  border: 1.4px solid rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 50px;
+  background: linear-gradient(to right, #5e5e8f, #c79ff5, #5e5e8f);
+  transition: all 0.3s ease;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow only on the upper side */
+}
+
+.navbar.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8); 
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  margin-left: 55px;
+}
+
+.navbar ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 15px;
+  position: relative;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #031946;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar ul li a i {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.navbar ul li::after {
+  content: '';
+  height: 2.5px;
+  width: 0;
+  background: #031946;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  transition: 0.5s;
+}
+
+.navbar ul li:hover::after {
+  width: 65%;
+}
+
+/* Existing login page styles */
+.login-container {
+  background: rgb(53,8,101); /* Semi-transparent black background */
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  width: 400px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.login-container:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* Hover shadow effect */
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #f4f4f4;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+label {
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  font-size: 12px;
+  color: #bbb;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 6px;
+}
+
+input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3c5c8b;
+  box-shadow: 0 0 10px rgba(60, 92, 139, 0.5); /* Blue focus glow */
+}
+
+.icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bbb;
+}
+
+.input-container input {
+  padding-left: 40px; /* Extra padding to accommodate icon */
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: rgb(19, 1, 39); /* Navy blue color */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2c4d74; /* Slightly darker blue on hover */
+}
+
+button:active {
+  background-color: #1f3c58; /* Even darker blue on click */
+}
+
+.error {
+  color: #f44336; /* Red error message */
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.loader {
+  display: none;
+  margin-top: 20px;
+  width: 24px;
+  height: 24px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3c5c8b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* After login container */
+.after-login-container {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  width: 400px;
+  text-align: center;
+  display: none; /* Hidden initially */
+}
+
+.after-login-container h3 {
+  margin-bottom: 20px;
+}
+
+.option-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #3c5c8b;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.option-button:hover {
+  background-color: #2c4d74;
+}
+
+.dialog-box {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  text-align: center;
+}
+
+.dialog-box button {
+  background-color: #3c5c8b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.dialog-box button:hover {
+  background-color: #2c4d74;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    width: 90%;
+    padding: 30px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 12px 18px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .after-login-container {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .option-button {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  /* Navbar adjustments */
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .navbar ul {
+    margin-left: 20px;
+  }
+
+  .navbar ul li a {
+    font-size: 0.8rem;
+  }
+
+  .navbar ul li a i {
+    font-size: 1.2rem; /* Icon size adjustment for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .login-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .after-login-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .option-button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .dialog-box {
+    width: 80%;
+    padding: 15px;
+  }
+
+  /* Navbar adjustments for small screens */
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar ul {
+    margin-left: 10px;
+  }
+
+  .navbar ul li a {
+    font-size: 0.75rem;
+  }
+
+  .logo {
+    height: 60px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <nav class="navbar sticky">
+            <div class="logo-container">
+                <img src="gurukilli.png" alt="Gurukilli Logo" class="logo">
+            </div>
+            <li style="list-style-type: none; margin-bottom: 0;"> <div id="google_translate_element"></div></li>
+            <ul>
+
+                <li><a href="index.html">Home</a></li>
+                <li><a href="authentication/frontend/register.html">Subjects</a></li>
+                <li><a href="authentication/frontend/register.html">Login</a></li>
+            </ul>
+        </nav>
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form id="login-form">
+      <div class="input-container">
+        <i class="fas fa-user icon"></i>
+        <input type="text" id="username" required placeholder="Enter Username" autofocus>
+      </div>
+
+      <div class="input-container">
+        <i class="fas fa-lock icon"></i>
+        <input type="password" id="password" required placeholder="Enter Password">
+      </div>
+
+      <button type="submit">Login</button>
+
+      <p id="error-message" class="error"></p>
+      <div class="loader" id="loader"></div>
+    </form>
+  </div>
+
+  <!-- After login container -->
+  <div class="after-login-container" id="after-login-container">
+    <h3>Welcome, <span id="username-display"></span></h3>
+    <button class="option-button" id="peer-2-peer">Peer 2 Peer</button>
+    <button class="option-button" id="share">Share</button>
+  </div>
+
+  <!-- Dialog box for Share button -->
+  <div class="dialog-box" id="dialog-box">
+    <p>This page is under construction.</p>
+    <button onclick="closeDialog()">OK</button>
+  </div>
+
+  <script>
+    // The correct password (for this example)
+    const correctPassword = 'GuruKilli#2025@GPPians';
+
+    const form = document.getElementById('login-form');
+    const usernameField = document.getElementById('username');
+    const passwordField = document.getElementById('password');
+    const errorMessage = document.getElementById('error-message');
+    const loader = document.getElementById('loader');
+    const afterLoginContainer = document.getElementById('after-login-container');
+    const usernameDisplay = document.getElementById('username-display');
+    const peer2peerButton = document.getElementById('peer-2-peer');
+    const shareButton = document.getElementById('share');
+    const dialogBox = document.getElementById('dialog-box');
+
+    // Function to handle form submission
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Clear previous messages
+      errorMessage.textContent = '';
+      loader.style.display = 'block';
+
+      const username = usernameField.value.trim();
+      const password = passwordField.value;
+
+      if (!username || !password) {
+        errorMessage.textContent = 'Please fill in both fields.';
+        loader.style.display = 'none';
+        return;
+      }
+
+      setTimeout(() => {
+        if (password === correctPassword) {
+          // Success case: show the username and options
+          loader.style.display = 'none';
+          document.querySelector('.login-container').style.display = 'none'; // Hide the login form
+          afterLoginContainer.style.display = 'block'; // Show the after login options
+          usernameDisplay.textContent = username; // Display the username
+        } else {
+          errorMessage.textContent = 'Invalid password. Please try again.';
+          loader.style.display = 'none';
+        }
+      }, 1000);
+    });
+
+    // Peer 2 Peer button click event
+    peer2peerButton.addEventListener('click', function() {
+      window.location.href = 'admin.html'; // Redirect to admin.html
+    });
+
+    // Share button click event
+    shareButton.addEventListener('click', function() {
+      dialogBox.style.display = 'block'; // Show the dialog box
+    });
+
+    // Close the dialog box
+    function closeDialog() {
+      dialogBox.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

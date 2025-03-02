@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/translate.css">
+
+    <!-- ✅ Load Supabase First -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- ✅ Load script.js After -->
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <nav class="navbar sticky">
+        <div class="logo-container">
+            <img src="gurukilli.png" alt="Gurukilli Logo" class="logo">
+        </div>
+        <div id="google_translate_element"></div>
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+            <li><a href="authentication/frontend/register.html">Subjects</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="authentication/frontend/register.html">Login</a></li>
+        </ul>
+    </nav>
+    <h1>Upload Your Notes</h1>
+    <input type="file" id="fileInput">
+    <input type="text" id="uploaderName" placeholder="Enter your name" required>
+    <button id="uploadBtn">Upload</button>
+
+    <p id="status"></p>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        } 
+  </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

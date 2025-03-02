@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script defer src="library.js"></script>
+    <style>
+        .like-btn {
+            cursor: pointer;
+            color: black;
+        }
+        .liked {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Library - Approved Notes</h1>
+    <input type="text" id="searchInput" placeholder="Search notes...">
+    <div id="approvedFiles"></div>
+</body>
+</html>
