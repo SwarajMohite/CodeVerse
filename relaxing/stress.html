@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relaxation Zone</title>
+    <link rel="stylesheet" href="stress.css">
+    <link rel="stylesheet" href="/translate.css">
+</head>
+<body>
+
+    <nav class="navbar sticky">
+        <div class="logo-container">
+            <img src="/gurukilli.png" alt="Gurukilli Logo" class="logo">
+        </div>
+        <li style="list-style-type: none; margin-bottom: 0;"> <div id="google_translate_element"></div></li>
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+            <li><a href="authentication/frontend/register.html">Subjects</a></li>
+            <li><a href="authentication/frontend/register.html">Login</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Relaxation Zone</h1>
+
+        <!-- Relaxation Types -->
+        <div class="relaxation-options">
+            <div class="relaxation-type" id="music-btn">
+                <p>Music</p>
+                <img src="1.jpg" alt="Music Image" class="relaxation-image">
+            </div>
+            <div class="relaxation-type" id="videos-btn">
+                <p>Relaxing Videos</p>
+                <img src="2.jpg" alt="Video Image" class="relaxation-image">
+            </div>
+            <div class="relaxation-type" id="yoga-btn">
+                <p>Yoga</p>
+                <img src="3.jpg" alt="Yoga Image" class="relaxation-image">
+            </div>
+            <div class="relaxation-type" id="meditation-btn">
+                <p>Meditation</p>
+                <img src="4.jpg" alt="Meditation Image" class="relaxation-image">
+            </div>
+        </div>
+
+        <!-- Relaxation Content Sections -->
+        <div id="music-content" class="content-section">
+            <h2>Choose Relaxing Music</h2>
+            <ul>
+                <li><button class="music" data-src="nature.mp3">Nature Sounds</button></li>
+                <li><button class="music" data-src="ocean.mp3">Ocean Waves</button></li>
+                <li><button class="music" data-src="rainfall.mp3">Rainfall Sounds</button></li>
+                <li><button class="music" data-src="fireplace.mp3">Fireplace Sounds</button></li>
+            </ul>
+        </div>
+
+        <div id="videos-content" class="content-section">
+            <h2>Choose Relaxing Video</h2>
+            <ul>
+                <li><button class="video" data-src="https://www.youtube-nocookie.com/embed/BHACKCNDMW8?si=5f6zj-0N2gpYXw-T&amp;start=110" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen> Relaxing Nature</button></li>
+                <li>
+                    <button class="video" data-src="https://www.youtube-nocookie.com/embed/Jyy0ra2WcQQ?si=IxkO1ZREysWkBxDX&amp;start=18" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Meditation Video
+                    </button>
+                </li>
+                <li><button class="video" data-src="https://www.youtube-nocookie.com/embed/RzVvThhjAKw?si=yHfjRT3BOzg57PR1&amp;start=60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Relaxing Forest</button></li>
+                <li><button class="video" data-src="https://www.youtube-nocookie.com/embed/lE6RYpe9IT0?si=gLB5FAbQx0eyapRA&amp;start=2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Soothing Waterfalls</button></li>
+            </ul>
+        </div>
+
+        <div id="yoga-content" class="content-section">
+            <h2>Yoga Videos</h2>
+            <ul>
+                <li><button class="youtube-video" data-src="https://www.youtube-nocookie.com/embed/j7rKKpwdXNE?si=vB841_3dftqTdfph" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Beginner Yoga</button></li>
+                <li><button class="youtube-video" data-src="https://www.youtube-nocookie.com/embed/0sYAWZXL268?si=J4RUjuF1Iq6vhUeR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Morning Yoga</button></li>
+                <li><button class="youtube-video" data-src="https://www.youtube-nocookie.com/embed/KsVwAs9LriQ?si=f3mIlz_K6jrPFn7q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Deep Stretching Yoga</button></li>
+            </ul>
+        </div>
+
+        <div id="meditation-content" class="content-section">
+            <h2>Meditation Videos</h2>
+            <ul>
+                <li><button class="youtube-video" data-src="https://www.youtube-nocookie.com/embed/W19PdslW7iw?si=btbA71KvIrYMHnK2&amp;start=12" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Guided Meditation</button></li>
+                <li><button class="youtube-video" data-src="https://www.youtube-nocookie.com/embed/86m4RC_ADEY?si=a0rCgO2ETik_mE9B&amp;start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Relaxation Meditation</button></li>
+                <li><button class="youtube-video" data-src="https://www.youtube-nocookie.com/embed/rvaqPPjtxng?si=7BuhP8qc8LPIAXEP&amp;start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    Sleep Meditation</button></li>
+            </ul>
+        </div>
+    
+        <!-- Audio Player Section -->
+        <div class="audio-player" id="audio-player-container" style="display: none;">
+            <audio id="audio-player" controls>
+                <source id="audio-source" src="" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Embedded Video Display Section -->
+        <div class="video-player" id="video-player-container" style="display: none;">
+            <iframe id="video-player" width="600" height="400" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+
+    <!-- Background Audio Player (hidden) -->
+    <audio id="background-audio" autoplay loop style="position: absolute; top: -9999px; left: -9999px; width: 0; height: 0;">
+        <source src="1.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <script src="stress.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        } 
+  </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
