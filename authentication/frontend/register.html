@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="/translate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar sticky">
+        <div class="logo-container">
+            <img src="/gurukilli.png" alt="Gurukilli Logo" class="logo">
+        </div>
+        <li style="list-style-type: none; margin-bottom: 0;"> <div id="google_translate_element"></div></li>
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+            <li><a href="authentication/frontend/register.html">Subjects</a></li>
+            <li><a href="authentication/frontend/register.html">Login</a></li>
+        </ul>
+    </nav>
+    
+    <div class="body">
+        <div class="container">
+
+<div class="form-box login">
+    <form id="loginForm">
+        <h1>Login</h1>
+        <div class="input-box">
+            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+            <i class="fas fa-envelope"></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            <i class="fas fa-lock"></i>
+        </div>
+        <div class="forgot-password">
+            <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p id="loginMessage"></p>
+    </form>
+</div>
+
+
+            <!-- Registration Form -->
+            <div class="form-box register">
+                <form id="registerForm">
+                    <h1 style="color: rgb(53, 8, 101);">Registration</h1>
+                    <div class="input-box">
+                        <input type="text" id="username" placeholder="Enter your username" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="registerPassword" placeholder="Create a password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <button type="submit" class="btn" style="background-color: rgb(53, 8, 101);">Register</button>
+                    <!-- <button type="button" class="btn" id="resendVerification">Resend Verification Email</button> -->
+                    <p id="registerMessage"></p>
+                </form>
+            </div>
+
+            <!-- Toggle panels -->
+            <div class="toggle-box">
+                <div class="toggle-panel toggle-left">
+                    <h1>Hello, Welcome!</h1>
+                    <p>Don't have an account?</p>
+                    <button class="btn register-btn">Register</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Welcome Back!</h1>
+                    <p>Already have an account?</p>
+                    <button class="btn login-btn">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Gurukilli</h4>
+                <p>Empowering 10th-grade students with innovative learning solutions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="register.html">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: <a href="mailto:info@gurukilli.com">info@gurukilli.com</a></p>
+                <!-- <p>Phone: <a href="</a></p> -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gurukilli. All rights reserved.</p>
+            <p>Made with ❤️ by <strong>CodeVerse</strong></p>
+            <p>Our Team: Swaraj Mohite, Akshay Kedar, Harshada Lokare, Hemanshu Patil</p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script type="module" src="../firebase/firebase-config.js"></script>
+    <script type="module" src="../firebase/auth.js"></script>
+    <script src="registerscript.js"></script>
+   
+    
+      <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        } 
+  </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
