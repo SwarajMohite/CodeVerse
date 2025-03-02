@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Geometry Quiz</title>
+    <link rel="stylesheet" href="circle.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Circle Geometry Quiz</h1>
+
+        <div id="timer">
+            <p>Time Left: <span id="time-left">90</span> seconds</p>
+        </div>
+
+        <div id="question">
+            <p><strong>Question Type:</strong> <span id="question-type"></span></p>
+            <p id="radius-question"></p>
+            <p id="angle-question"></p>
+        </div>
+
+        <input type="number" id="user-answer" placeholder="Enter your answer" />
+        <button id="submit-answer">Submit</button>
+
+        <div id="result"></div>
+        <p><strong>Score:</strong> <span id="score-value">0</span></p>
+        <p><strong>Level:</strong> <span id="level-value">Easy</span></p>
+    </div>
+
+    <script src="circle.js"></script>
+</body>
+</html>

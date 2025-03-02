@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometry Game</title>
+    <link rel="stylesheet" href="trigno.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Trigonometry Quiz</h1>
+        <p id="timer">Time Left: <span id="time-left">180</span> seconds</p>
+        <div id="question" class="question-area">
+            <p id="question-type">Find the value of sin(θ) if... </p>
+            <p id="additional-info"></p>
+        </div>
+        <input type="number" id="user-answer" placeholder="Enter answer here">
+        <button id="submit-answer">Submit Answer</button>
+        <button id="hint-button">Show Hint</button>
+        <div id="hint" class="hint"></div>
+        <div id="result"></div>
+        <p id="explanation"></p>
+        <p>Score: <span id="score-value">0</span></p>
+        <p>Level: <span id="level-value">Easy</span></p>
+    </div>
+    <script src="trigno.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pythagoras Theorem Game</title>
+    <link rel="stylesheet" href="hypo.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Pythagoras Theorem Game</h1>
+        <p>Calculate the Hypotenuse (c) of the Right-Angled Triangle</p>
+
+        <div id="timer" class="timer">Time: <span id="time-left">30</span> seconds</div>
+
+        <div class="question">
+            <p>Leg A: <span id="leg-a"></span></p>
+            <p>Leg B: <span id="leg-b"></span></p>
+        </div>
+
+        <input type="number" id="user-answer" placeholder="Enter Hypotenuse (c)" />
+        <button id="submit-answer">Submit Answer</button>
+
+        <div id="result" class="result"></div>
+
+        <div id="score">
+            <p>Score: <span id="score-value">0</span></p>
+        </div>
+    </div>
+
+    <script src="hypo.js"></script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Table Sort Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .tubes-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tube {
+            width: 70px;
+            height: 240px;
+            background-color: #e0e0e0;
+            border: 3px solid #999;
+            border-radius: 0 0 35px 35px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .element {
+            width: 100%;
+            height: 60px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: move;
+            transition: top 0.3s ease-out;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .controls {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .moves {
+            font-size: 20px;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        #message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .win {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .lose {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Periodic Table Sort</h1>
+        <div class="tubes-container" id="tubesContainer"></div>
+        <div class="controls">
+            <button onclick="initializeGame()">New Game</button>
+            <button onclick="submitSolution()">Submit</button>
+        </div>
+        <div class="moves">Moves: <span id="moveCount">0</span></div>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const allElements = [
+            { symbol: 'H', group: 1, color: '#FF9999' },
+            { symbol: 'Li', group: 1, color: '#FFB399' },
+            { symbol: 'Na', group: 1, color: '#FFE699' },
+            { symbol: 'K', group: 1, color: '#FFFB99' },
+            { symbol: 'Rb', group: 1, color: '#E6FF99' },
+            { symbol: 'Cs', group: 1, color: '#99FF99' },
+            { symbol: 'Fr', group: 1, color: '#99FFE6' },
+            { symbol: 'Be', group: 2, color: '#99FFFF' },
+            { symbol: 'Mg', group: 2, color: '#99E6FF' },
+            { symbol: 'Ca', group: 2, color: '#99B3FF' },
+            { symbol: 'Sr', group: 2, color: '#9999FF' },
+            { symbol: 'Ba', group: 2, color: '#B399FF' },
+            { symbol: 'Ra', group: 2, color: '#E699FF' },
+            { symbol: 'Sc', group: 3, color: '#FF99FF' },
+            { symbol: 'Y', group: 3, color: '#FF99E6' },
+            { symbol: 'Ti', group: 4, color: '#FF99B3' },
+            { symbol: 'Zr', group: 4, color: '#FFCCE5' },
+            { symbol: 'Hf', group: 4, color: '#FFE5CC' },
+            { symbol: 'Rf', group: 4, color: '#FFE5E5' },
+            { symbol: 'V', group: 5, color: '#E5FFE5' },
+            { symbol: 'Nb', group: 5, color: '#CCFFE5' },
+            { symbol: 'Ta', group: 5, color: '#E5FFCC' },
+            { symbol: 'Db', group: 5, color: '#FFFFCC' },
+            { symbol: 'Cr', group: 6, color: '#FFCCFF' },
+            { symbol: 'Mo', group: 6, color: '#FFE5FF' },
+            { symbol: 'W', group: 6, color: '#E5E5FF' },
+            { symbol: 'Sg', group: 6, color: '#CCE5FF' },
+            { symbol: 'Mn', group: 7, color: '#CCFFFF' },
+            { symbol: 'Tc', group: 7, color: '#CCFFE5' },
+            { symbol: 'Re', group: 7, color: '#E5FFCC' },
+            { symbol: 'Bh', group: 7, color: '#FFFACC' },
+            { symbol: 'Fe', group: 8, color: '#FACCFF' },
+            { symbol: 'Ru', group: 8, color: '#FFE5FA' },
+            { symbol: 'Os', group: 8, color: '#FAE5FF' },
+            { symbol: 'Hs', group: 8, color: '#E5FAFF' },
+            { symbol: 'Co', group: 9, color: '#CCFAFA' },
+            { symbol: 'Rh', group: 9, color: '#FACCFA' },
+            { symbol: 'Ir', group: 9, color: '#FAFACC' },
+            { symbol: 'Mt', group: 9, color: '#FAFAE5' },
+            { symbol: 'Ni', group: 10, color: '#E5FAFA' },
+            { symbol: 'Pd', group: 10, color: '#FAFAE5' },
+            { symbol: 'Pt', group: 10, color: '#E5FAFA' },
+            { symbol: 'Ds', group: 10, color: '#FAFAE5' },
+            { symbol: 'Cu', group: 11, color: '#FACCCC' },
+            { symbol: 'Ag', group: 11, color: '#CCFACC' },
+            { symbol: 'Au', group: 11, color: '#CCCCFA' },
+            { symbol: 'Rg', group: 11, color: '#FACCFA' },
+            { symbol: 'Zn', group: 12, color: '#CCFAFA' },
+            { symbol: 'Cd', group: 12, color: '#FACCCC' },
+            { symbol: 'Hg', group: 12, color: '#CCFACC' },
+            { symbol: 'Cn', group: 12, color: '#CCCCFA' },
+            { symbol: 'B', group: 13, color: '#FAFACC' },
+            { symbol: 'Al', group: 13, color: '#CCFAFA' },
+            { symbol: 'Ga', group: 13, color: '#FACCCC' },
+            { symbol: 'In', group: 13, color: '#CCFACC' },
+            { symbol: 'Tl', group: 13, color: '#CCCCFA' },
+            { symbol: 'Nh', group: 13, color: '#FACCFA' },
+            { symbol: 'C', group: 14, color: '#E5E5E5' },
+            { symbol: 'Si', group: 14, color: '#CCCCCC' },
+            { symbol: 'Ge', group: 14, color: '#FAFAFA' },
+            { symbol: 'Sn', group: 14, color: '#E5E5E5' },
+            { symbol: 'Pb', group: 14, color: '#CCCCCC' },
+            { symbol: 'Fl', group: 14, color: '#FAFAFA' },
+            { symbol: 'N', group: 15, color: '#FF99CC' },
+            { symbol: 'P', group: 15, color: '#FFCC99' },
+            { symbol: 'As', group: 15, color: '#99FFCC' },
+            { symbol: 'Sb', group: 15, color: '#99CCFF' },
+            { symbol: 'Bi', group: 15, color: '#CC99FF' },
+            { symbol: 'Mc', group: 15, color: '#FFCC99' },
+            { symbol: 'O', group: 16, color: '#99FFFF' },
+            { symbol: 'S', group: 16, color: '#FFFF99' },
+            { symbol: 'Se', group: 16, color: '#FF99FF' },
+            { symbol: 'Te', group: 16, color: '#99FF99' },
+            { symbol: 'Po', group: 16, color: '#FF9999' },
+            { symbol: 'Lv', group: 16, color: '#9999FF' },
+            { symbol: 'F', group: 17, color: '#99CCFF' },
+            { symbol: 'Cl', group: 17, color: '#CCFF99' },
+            { symbol: 'Br', group: 17, color: '#FFCC99' },
+            { symbol: 'I', group: 17, color: '#FF99CC' },
+            { symbol: 'At', group: 17, color: '#CC99FF' },
+            { symbol: 'Ts', group: 17, color: '#99FFCC' },
+            { symbol: 'He', group: 18, color: '#FFCCCC' },
+            { symbol: 'Ne', group: 18, color: '#CCFFCC' },
+            { symbol: 'Ar', group: 18, color: '#CCCCFF' },
+            { symbol: 'Kr', group: 18, color: '#FFCCFF' },
+            { symbol: 'Xe', group: 18, color: '#CCFFFF' },
+            { symbol: 'Rn', group: 18, color: '#FFFFCC' },
+            { symbol: 'Og', group: 18, color: '#FFCCCC' }
+        ];
+
+        let gameElements = [];
+        let tubes = [];
+        let moves = 0;
+        let draggedElement = null;
+
+        function createTube(index, elements = []) {
+            return { index, elements, maxSize: 3 };
+        }
+
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function isGameWon() {
+            return tubes.every(tube => {
+                if (tube.elements.length === 0) return true;
+                const group = tube.elements[0].group;
+                return tube.elements.every(element => element.group === group) && tube.elements.length === tube.maxSize;
+            });
+        }
+
+        function renderTubes() {
+            const container = document.getElementById('tubesContainer');
+            container.innerHTML = '';
+            
+            tubes.forEach((tube, tubeIndex) => {
+                const tubeElement = document.createElement('div');
+                tubeElement.className = 'tube';
+                tubeElement.dataset.index = tubeIndex;
+                
+                tube.elements.forEach((element, elementIndex) => {
+                    const elementDiv = document.createElement('div');
+                    elementDiv.className = 'element';
+                    elementDiv.style.backgroundColor = element.color;
+                    elementDiv.style.top = `${180 - elementIndex * 60}px`;
+                    elementDiv.textContent = element.symbol;
+                    elementDiv.draggable = true;
+                    elementDiv.dataset.tubeIndex = tubeIndex;
+                    elementDiv.dataset.elementIndex = elementIndex;
+                    
+                    elementDiv.addEventListener('dragstart', dragStart);
+                    tubeElement.appendChild(elementDiv);
+                });
+                
+                tubeElement.addEventListener('dragover', dragOver);
+                tubeElement.addEventListener('drop', drop);
+                container.appendChild(tubeElement);
+            });
+        }
+
+        function dragStart(e) {
+            const tubeIndex = parseInt(e.target.dataset.tubeIndex);
+            const elementIndex = parseInt(e.target.dataset.elementIndex);
+            if (elementIndex === tubes[tubeIndex].elements.length - 1) {
+                draggedElement = { tubeIndex, elementIndex };
+                e.dataTransfer.setData('text/plain', e.target.textContent);
+            } else {
+                e.preventDefault();
+            }
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            const targetTubeIndex = parseInt(e.currentTarget.dataset.index);
+            
+            if (draggedElement && draggedElement.tubeIndex !== targetTubeIndex) {
+                const fromTube = tubes[draggedElement.tubeIndex];
+                const toTube = tubes[targetTubeIndex];
+                
+                if (toTube.elements.length < toTube.maxSize) {
+                    const element = fromTube.elements.pop();
+                    toTube.elements.push(element);
+                    moves++;
+                    document.getElementById('moveCount').textContent = moves;
+                    
+                    renderTubes();
+                    clearMessage();
+                }
+            }
+            
+            draggedElement = null;
+        }
+
+        function submitSolution() {
+            const messageElement = document.getElementById('message');
+            if (isGameWon()) {
+                messageElement.textContent = "Congratulations! You've mastered the Periodic Table Sort!";
+                messageElement.className = 'win';
+            } else {
+                messageElement.textContent = "Not quite right. Keep trying!";
+                messageElement.className = 'lose';
+            }
+        }
+
+        function clearMessage() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = '';
+            messageElement.className = '';
+        }
+
+        function initializeGame() {
+            moves = 0;
+            document.getElementById('moveCount').textContent = moves;
+            clearMessage();
+            
+            // Randomly select 9 elements for the game
+            gameElements = shuffle(allElements).slice(0, 9);
+            
+            tubes = [];
+            const shuffledElements = shuffle([...gameElements]);
+            let elementIndex = 0;
+            
+            for (let i = 0; i < 3; i++) {
+                const tubeElements = [];
+                for (let j = 0; j < 3 && elementIndex < shuffledElements.length; j++) {
+                    tubeElements.push(shuffledElements[elementIndex++]);
+                }
+                tubes.push(createTube(i, tubeElements));
+            }
+            
+            for (let i = 3; i < 5; i++) {
+                tubes.push(createTube(i));
+            }
+            
+            renderTubes();
+        }
+
+        initializeGame();
+    </script>
+</body>
+</html>

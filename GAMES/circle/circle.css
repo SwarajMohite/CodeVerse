@@ -1,0 +1,118 @@
+/* General body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e3f2fd; /* Light blue background */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Game container styles */
+.game-container {
+    background-color: #1976d2; /* Blue background for the game box */
+    padding: 40px;
+    border-radius: 15px;
+    width: 350px; /* Slightly wider container */
+    margin: 50px auto; /* Centered with some space from the top */
+    color: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+}
+
+/* Header styles */
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Timer styles */
+#timer {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+/* Question area */
+#question {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #2196f3; /* Light blue background for question section */
+    border-radius: 8px;
+}
+
+/* Question text styles */
+#radius-question, #angle-question {
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+/* Input field for answer */
+input[type="number"] {
+    padding: 12px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    width: 85%;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.3s ease;
+}
+
+/* Input field focus style */
+input[type="number"]:focus {
+    border: 2px solid #0d47a1;
+    box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+}
+
+/* Submit button styles */
+button {
+    padding: 12px;
+    font-size: 1.2em;
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #1565c0;
+}
+
+/* Result message styling */
+#result {
+    font-size: 1.4em;
+    margin-top: 20px;
+    padding: 10px;
+    /* background-color: #4c93af; Green for correct answers */
+    color: rgb(15, 1, 79);
+    border-radius: 8px;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Styling for incorrect answers */
+#result.incorrect {
+    background-color: #f44336; /* Red for incorrect answers */
+}
+
+/* Score and level styles */
+#score-value, #level-value {
+    font-weight: bold;
+}
+
+/* Styling for score display */
+#score-value {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+/* Styling for level display */
+#level-value {
+    font-size: 1.2em;
+    color: #fff;
+}
