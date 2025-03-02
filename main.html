@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gurukilli - Empowering 10th-grade students</title>
+    <meta name="description" content="Gurukilli - Innovative learning solutions for 10th-grade students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="translate.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="banner">
+        <nav class="navbar sticky">
+            <div class="logo-container">
+                <img src="gurukilli.png" alt="Gurukilli Logo" class="logo">
+            </div>
+            <li style="list-style-type: none; margin-bottom: 0;"> <div id="google_translate_element"></div></li>
+            <ul>
+
+                <li><a href="main.html">Home</a></li>
+                <li><a href="subjectss.html">Subjects</a></li>
+                <li><a href="authentication/frontend/register.html">Logout</a></li>
+            </ul>
+        </nav>
+      
+        <div class="content">
+            <img src="hero-logo.png" alt="Gurukilli Logo" class="hero-logo">
+            <div class="hero-logo-title">
+                <h1 id="gurukilli-title">GURUKILLI</h1>
+            </div>
+            <div id="underline"></div>
+            <p id="gurukilli-description">Education is the key to success, We found it -  <b>GURUKILLI</b></p>
+            <div class="cta-buttons">
+                <button type="button" class="cta-button" onclick="window.location.href='subjectss.html'">
+                    <span></span>Start learning
+                </button>
+                
+                <button type="button" class="cta-button" onclick="document.getElementById('features').scrollIntoView({ behavior: 'smooth' });">
+                    <span></span>Explore Features
+                </button>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- <div class="chatbot-icon">
+        <a href="chat.html" aria-label="Open chatbot">
+            <img src="chatbot.png" alt="Chatbot icon">
+        </a>
+    </div>  -->
+    
+    <div class="body">
+        <h2 id="features" style="text-align: center;">Gurukilli Features</h2>
+        <div class="carousel">
+            <!-- List items -->
+            <div class="list">
+                <div class="item">
+                    <img src="back-g.jpg" alt="AI Study Buddy">
+                    <div class="content">
+                        <div class="author">CODEVERSE</div>
+                        <!-- <div class="title">GURUKILLI</div> -->
+                        <div class="topic">AI Study Buddy</div>
+                        <div class="des">Instant explanations, study suggestions, and AI-powered doubt-solving.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/2.jpg" alt="Gamified Learning">
+                    <div class="content">
+                        <div class="author">CODEVERSE</div>
+                        <!-- <div class="title">GURUKILLI</div> -->
+                        <div class="topic">Gamified Learning</div>
+                        <div class="des">Interactive education with rewards, badges, and challenges to keep students motivated.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/3.jpg" alt="Video Lectures">
+                    <div class="content">
+                        <div class="author">CODEVERSE</div>
+                        <!-- <div class="title">GURUKILLI</div> -->
+                        <div class="topic">Video Lectures</div>
+                        <div class="des">Engaging and interactive lessons with animations or real teachers.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="back-g.jpg" alt="Peer-to-Peer Teaching">
+                    <div class="content">
+                        <div class="author">CODEVERSE</div>
+                        <!-- <div class="title">GURUKILLI</div> -->
+                        <div class="topic">Peer-to-Peer Teaching</div>
+                        <div class="des">Students can teach and learn from each other, making education more engaging.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/1.jpg" alt="Virtual Classroom">
+                    <div class="content">
+                        <div class="author">CODEVERSE</div>
+                        <!-- <div class="title">GURUKILLI</div> -->
+                        <div class="topic">Virtual Classroom</div>
+                        <div class="des">Live interactive virtual classroom for real-time learning with teachers and classmates</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Thumbnail Section -->
+            <div class="thumbnail">
+                <div class="item">
+                    <img src="back-g.jpg" alt="AI Study Buddy">
+                    <div class="content">
+                        <div class="title" style="color: black;">AI Study Buddy</div>
+                        <div class="description">Instant explanations and study assistance.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/2.jpg" alt="Gamified Learning">
+                    <div class="content">
+                        <div class="title" style="color: black;">Gamified Learning</div>
+                        <div class="description">Rewards and challenges to keep students engaged.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/3.jpg" alt="Video Lectures">
+                    <div class="content">
+                        <div class="title" style="color: black;">Video Lectures</div>
+                        <div class="description">Animated & teacher-led lessons.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="back-g.jpg" alt="Peer-to-Peer Teaching">
+                    <div class="content">
+                        <div class="title" style="color: black;">Peer-to-Peer Teaching</div>
+                        <div class="description">Students learning from each other.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <div class="arrows">
+                <button id="prev">&lt;</button>
+                <button id="next">&gt;</button>
+            </div>
+            
+            <!-- Progress Indicator -->
+            <div class="time"></div>
+        </div>
+    </div>
+    
+    <section id="about" class="about-section">
+        <div class="wrapper">
+            <h2 class="section-title";>About Gurukilli</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Gurukilli is an innovative educational platform designed specifically for 10th-grade students. Our mission is to make learning engaging, accessible, and effective through interactive content and comprehensive study materials.</p>
+                    <p>We provide resources across all major subjects, helping students prepare for their exams and build a strong foundation for higher education.</p>
+                </div>
+                <div class="about-video">
+                    <video autoplay loop muted>
+                        <source src="your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Gurukilli</h4>
+                <p>Empowering 10th-grade students with innovative learning solutions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="register.html">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: <a href="mailto:info@gurukilli.com">info@gurukilli.com</a></p>
+                <!-- <p>Phone: <a href="</a></p> -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gurukilli. All rights reserved.</p>
+            <p>Made with ❤️ by <strong>CodeVerse</strong></p>
+            <p>Our Team: Swaraj Mohite, Akshay Kedar, Harshada Lokare, Hemanshu Patil</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+      <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        } 
+  </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
+

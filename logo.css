@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #DAD4B5, #F9D689);
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.key-icon {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    animation: rotate 10s linear infinite;
+    transition: filter 0.3s ease;
+}
+
+.key-handle {
+    width: 40px;
+    height: 40px;
+    border: 8px solid #E0A75E;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.key-base {
+    width: 20px;
+    height: 40px;
+    background-color: #E0A75E;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo-text {
+    font-size: 48px;
+    margin: 0;
+}
+
+.guru {
+    color: #800000;
+}
+
+.killi {
+    color: #E0A75E;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.key-icon:hover {
+    filter: drop-shadow(0 0 10px #E0A75E);
+    animation-duration: 5s;
+}
+
+.logo-text:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
