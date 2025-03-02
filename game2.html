@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Sorting Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .test-tube {
+            width: 100px;
+            height: 200px;
+            border: 2px solid black;
+            margin: 20px;
+            display: inline-block;
+            background: lightblue;
+        }
+        .block {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            background-color: orange;
+            color: white;
+            font-size: 14px;
+            display: inline-block;
+            line-height: 50px;
+            cursor: grab;
+        }
+        .test-tube-container {
+            display: flex;
+            justify-content: center;
+        }
+        .instructions {
+            font-size: 18px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Element Sorting Game</h1>
+    <p class="instructions">Drag the elements into the correct test tube based on their type!</p>
+    <div class="block" draggable="true" id="metal">Fe (Metal)</div>
+    <div class="block" draggable="true" id="non-metal">O₂ (Non-Metal)</div>
+    <div class="block" draggable="true" id="compound">H₂O (Compound)</div>
+
+    <div class="test-tube-container">
+        <div class="test-tube" id="metal-tube">Metals</div>
+        <div class="test-tube" id="non-metal-tube">Non-Metals</div>
+        <div class="test-tube" id="compound-tube">Compounds</div>
+    </div>
+
+    <p id="score">Score: 0</p>
+
+    <script src="game2.js"></script>
+</body>
+</html>

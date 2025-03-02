@@ -1,0 +1,28 @@
+
+#google_translate_element {
+    width: 195px;  
+    height: 36px;  
+    overflow: hidden;
+    color: white; 
+    font-size: 22px;
+ /* background-color: #031946;  */
+    padding: 8px;
+    border-radius: 5px;
+    margin-left: 610px;
+    /* margin-bottom: 22px; */
+}
+
+/* Limit the translation container size and add overflow hidden to crop the content */
+.goog-te-banner-frame {
+   
+    display: none !important;
+}
+.goog-te-gadget-simple {
+    color: #fff;  /* White color for the translation box */
+}
+
+/* Styling for the translate widget dropdown */
+.goog-te-combo {
+    color: #031946;  /* Customize dropdown color */
+    background-color: #fff;  /* Customize dropdown background */
+}
