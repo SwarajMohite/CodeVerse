@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    perspective: 1000px;
+}
+
+.carousel {
+    position: relative;
+    width: 500px;
+    height: 250px;
+    transform-style: preserve-3d;
+    transform: rotateX(20deg);
+}
+
+.carousel-item {
+    position: absolute;
+    width: 120px;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Arrange images in a half-circle (180°) */
+.img1 { background-image: url('back-g.jpg'); transform: rotateY(-60deg) translateZ(250px) translateX(-80px); }
+.img2 { background-image: url('back-g.jpg'); transform: rotateY(-30deg) translateZ(250px) translateX(-40px); }
+.img3 { background-image: url('back-g.jpg'); transform: rotateY(0deg) translateZ(250px); }
+.img4 { background-image: url('back-g.jpg'); transform: rotateY(30deg) translateZ(250px) translateX(40px); }
+.img5 { background-image: url('back-g.jpg'); transform: rotateY(60deg) translateZ(250px) translateX(80px); }
+
+/* Hover Effect - Moves image slightly forward */
+.carousel-item:hover {
+    transform: scale(1.2) translateZ(280px);
+    opacity: 1;
+}
+
+/* Auto rotation */
+@keyframes rotate {
+    from { transform: rotateY(-30deg); }
+    to { transform: rotateY(30deg); }
+}
+
+.carousel {
+    animation: rotate 5s infinite alternate ease-in-out;
+}

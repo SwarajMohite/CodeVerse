@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed 3D Carousel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #1a1a2e, #16213e);
+            font-family: Arial, sans-serif;
+        }
+        .swiper {
+            width: 80%;
+            max-width: 1200px;
+            padding-top: 50px;
+            padding-bottom: 80px;
+        }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 250px;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.35);
+            transition: transform 0.3s ease-in-out;
+        }
+        .swiper-slide-active {
+            transform: scale(1.15);
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .swiper-pagination {
+            position: absolute;
+            bottom: 20px !important;
+        }
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+        }
+        .swiper-pagination-bullet-active {
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://picsum.photos/250/350?random=1" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/250/350?random=2" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/250/350?random=3" alt="Image 3"></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/250/350?random=4" alt="Image 4"></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/250/350?random=5" alt="Image 5"></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/250/350?random=6" alt="Image 6"></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/250/350?random=6" alt="Image 6"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            coverflowEffect: {
+                rotate: 30,
+                stretch: 0, 
+                depth: 250,
+                modifier: 1,
+                slideShadows: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+    </script>
+</body>
+</html>
