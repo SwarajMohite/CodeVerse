@@ -26,6 +26,8 @@
 
 🎯 **Focus**: Marathi-medium and rural education upliftment, competitive readiness, and fun-based learning.
 
+Our PPT : [GuruKilli PPT](GuruKilli-Empowering-Std-X-Students-in-India.pdf.pdf)
+
 ---
 
 ## 🌐 Live Demos
